@@ -3,29 +3,9 @@ export type CharacteristicTableData = {
     id: string;
     tableName: string;
     tableData: CharacteristicTable;
-}[];
-
-export type CharacteristicTable = {
-    0: CharacteristicTableChild;
-    1: CharacteristicTableChild;
-    2: CharacteristicTableChild;
-    3: CharacteristicTableChild;
-    4: CharacteristicTableChild;
-    5: CharacteristicTableChild;
 };
 
-type CharacteristicTableChild = {
-    0: string;
-    1: string;
-    2: string;
-    3: string;
-    4: string;
-    5: string;
-    6: string;
-    7: string;
-    8: string;
-    9: string;
-}
+export type CharacteristicTable = string[][];
 
 // 特徴表データ
 export const defaultCharacteristicTable: CharacteristicTable = [
@@ -103,7 +83,7 @@ export const defaultCharacteristicTable: CharacteristicTable = [
     ]
 ]
 
-export const holeData: CharacteristicTableData = [
+export const holeData: CharacteristicTableData[] = [
     {
         id: "aaa",
         tableName: "特徴表",

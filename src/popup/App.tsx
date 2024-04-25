@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './App.css'
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
@@ -20,10 +19,10 @@ function App() {
                 Item One
             </div>
             <div hidden={value !== 1}>
-                Item One
+                Item Two
             </div>
             <div hidden={value !== 2}>
-                Item One
+                Item Tree
             </div>
         </>
     )

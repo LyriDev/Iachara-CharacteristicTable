@@ -1,5 +1,10 @@
 // 特徴表型定義
-type CharacteristicTable = {
+export type CharacteristicTableData = {
+    tableName: string;
+    tableData: CharacteristicTable;
+}[];
+
+export type CharacteristicTable = {
     0: CharacteristicTableChild;
     1: CharacteristicTableChild;
     2: CharacteristicTableChild;
@@ -7,6 +12,7 @@ type CharacteristicTable = {
     4: CharacteristicTableChild;
     5: CharacteristicTableChild;
 };
+
 type CharacteristicTableChild = {
     0: string;
     1: string;
@@ -94,4 +100,11 @@ export const defaultCharacteristicTable: CharacteristicTable = [
         "6-9【行方不明の家族】\n探索者には行方不明の家族がおり、キャンペーンの間に現れるかもしれない。",
         "6-10【好意を寄せられている】\nシナリオに登場する誰かに好意を持たれる。KPの裁量で誰が、なぜ好きなのかを決定する。\nどれほど好意を寄せているかはD100ロールで決める(数字が大きいほど好き)。"
     ]
+]
+
+export const holeData: CharacteristicTableData = [
+    {
+        tableName: "特徴表",
+        tableData: defaultCharacteristicTable
+    }
 ]

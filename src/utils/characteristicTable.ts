@@ -106,5 +106,13 @@ export const holeData: CharacteristicTableData = [
     {
         tableName: "特徴表",
         tableData: defaultCharacteristicTable
+    },
+    {
+        tableName: "特徴表2",
+        tableData: defaultCharacteristicTable
+    },
+    {
+        tableName: "特徴表3",
+        tableData: defaultCharacteristicTable
     }
 ]

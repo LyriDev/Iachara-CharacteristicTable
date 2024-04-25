@@ -1,27 +1,22 @@
 import { useState } from 'react'
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import TabBar from './components/TabBar';
 
 function App() {
-    const [value, setValue] = useState(0);
+    const [focusIndex, setFocusIndex] = useState(0);
 
     return (
         <>
-            <Tabs
-                value={value}
-                onChange={(_event: React.SyntheticEvent, newValue: number) => setValue(newValue)}
-            >
-                <Tab label="Item One"/>
-                <Tab label="Item Two"/>
-                <Tab label="Item Three"/>
-            </Tabs>
-            <div hidden={value !== 0}>
+            <TabBar
+                focusIndex={focusIndex}
+                setFocusIndex={setFocusIndex}
+            />
+            <div hidden={focusIndex !== 0}>
                 Item One
             </div>
-            <div hidden={value !== 1}>
+            <div hidden={focusIndex !== 1}>
                 Item Two
             </div>
-            <div hidden={value !== 2}>
+            <div hidden={focusIndex !== 2}>
                 Item Tree
             </div>
         </>

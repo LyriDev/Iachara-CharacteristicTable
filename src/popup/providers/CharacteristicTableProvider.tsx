@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 type ContextInfo = {
     characteristicTableData: CharacteristicTableData[];
     setCharacteristicTableData: React.Dispatch<React.SetStateAction<CharacteristicTableData[]>>;
-    addTable(): void;
+    addTable(): number;
     removeTable(index: number): void;
     swapTable(index: number, direction: 1 | -1): void;
 };
@@ -13,7 +13,7 @@ type ContextInfo = {
 const defaultContext: ContextInfo = {
     characteristicTableData: [],
     setCharacteristicTableData: () => {},
-    addTable: () => {},
+    addTable: () => 0,
     removeTable: () => {},
     swapTable: () => {}
 };
@@ -25,7 +25,7 @@ export function CharacteristicTableProvider({children}: {children: ReactNode}){
     const [characteristicTableData, setCharacteristicTableData] = useState<CharacteristicTableData[]>(holeData);
 
     // 新しい特徴表を作成する関数
-    function addTable(){
+    function addTable(): number{
         setCharacteristicTableData((prev) => {
             const copiedDefaultTable = [...defaultCharacteristicTable];
             const newData = {
@@ -35,6 +35,7 @@ export function CharacteristicTableProvider({children}: {children: ReactNode}){
             }
             return [...prev, newData];
         })
+        return characteristicTableData.length;
     }
 
     // 指定された特徴表を削除する関数

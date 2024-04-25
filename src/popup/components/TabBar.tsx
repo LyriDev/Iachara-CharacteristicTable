@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import Tabs from '@mui/material/Tabs';
 import { CharacteristicTableContext } from '../providers/CharacteristicTableProvider';
 import TabHeader from './TabHeader';
+import AddTabButton from './AddTabButton';
 
 export default function TabBar({
     focusIndex,
@@ -28,6 +29,9 @@ export default function TabBar({
                     setFocusIndex={setFocusIndex}
                 />
             ))}
+            <AddTabButton
+                setFocusIndex={setFocusIndex}
+            />
         </Tabs>
     )
 };

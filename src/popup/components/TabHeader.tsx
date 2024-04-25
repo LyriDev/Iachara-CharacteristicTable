@@ -14,9 +14,6 @@ export default function TabHeader({
     setFocusIndex: React.Dispatch<React.SetStateAction<number>>;
 }){
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-    // const {
-    //     characteristicTableData
-    // } = useContext(CharacteristicTableContext);
 
     return (
         <>

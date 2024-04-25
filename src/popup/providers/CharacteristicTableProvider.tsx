@@ -55,10 +55,11 @@ export function CharacteristicTableProvider({children}: {children: ReactNode}){
 
         // 指定された配列の要素を1つ隣と入れ替える
         setCharacteristicTableData((prev) => {
-            const temp: CharacteristicTableData = {...prev[index]};
-            prev[index] = {...prev[nextIndex]};
-            prev[nextIndex] = temp;
-            return prev;
+            const newTableData: CharacteristicTableData[] = [...prev];
+            const temp: CharacteristicTableData = {...newTableData[index]};
+            newTableData[index] = {...newTableData[nextIndex]};
+            newTableData[nextIndex] = temp;
+            return newTableData;
         })
     }
 

@@ -1,9 +1,9 @@
-import * as React from 'react';
+import { useContext } from 'react';
 import { styled, alpha } from '@mui/material/styles';
-import Button from '@mui/material/Button';
 import Menu, { MenuProps } from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
+import { CharacteristicTableContext } from '../providers/CharacteristicTableProvider';
 
 const StyledMenu = styled((props: MenuProps) => (
     <Menu
@@ -47,12 +47,22 @@ const StyledMenu = styled((props: MenuProps) => (
 }));
 
 export default function CustomizedMenus({
+    focusIndex,
+    setFocusIndex,
     anchorEl,
     setAnchorEl
 }: {
+    focusIndex: number;
+    setFocusIndex: React.Dispatch<React.SetStateAction<number>>;
     anchorEl: HTMLElement | null;
     setAnchorEl: React.Dispatch<React.SetStateAction<HTMLElement | null>>
 }) {
+    const {
+        addTable,
+        removeTable,
+        swapTable
+    } = useContext(CharacteristicTableContext);
+
     function handleClose(){
         setAnchorEl(null);
     };
@@ -64,10 +74,33 @@ export default function CustomizedMenus({
             onClose={handleClose}
         >
             <MenuItem onClick={handleClose}>名前を変更</MenuItem>
-            <MenuItem onClick={handleClose}>削除</MenuItem>
+            <MenuItem
+                onClick={() => {
+                    removeTable(focusIndex);
+                    handleClose();
+                }}
+            >
+                削除
+            </MenuItem>
             <Divider sx={{ my: 0.5 }} />
-            <MenuItem onClick={handleClose}>左に移動</MenuItem>
-            <MenuItem onClick={handleClose}>右に移動</MenuItem>
+            <MenuItem
+                onClick={() => {
+                    swapTable(focusIndex, -1);
+                    setFocusIndex((prev) => prev - 1);
+                    handleClose();
+                }}
+            >
+                左に移動
+            </MenuItem>
+            <MenuItem
+                onClick={() => {
+                    swapTable(focusIndex, 1);
+                    setFocusIndex((prev) => prev + 1);
+                    handleClose();
+                }}
+            >
+                右に移動
+            </MenuItem>
         </StyledMenu>
     );
 }

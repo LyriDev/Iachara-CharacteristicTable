@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import { CharacteristicTableContext } from '../providers/CharacteristicTableProvider';
 import TabHeader from './TabHeader';
 
@@ -20,10 +19,11 @@ export default function TabBar({
             value={focusIndex}
             onChange={(_event: React.SyntheticEvent, newValue: number) => setFocusIndex(newValue)}
         >
-            {characteristicTableData.map((tableData) => (
+            {characteristicTableData.map((tableData, index) => (
                 <TabHeader
                     key={tableData.id}
                     tableName={tableData.tableName}
+                    index={index}
                     focusIndex={focusIndex}
                     setFocusIndex={setFocusIndex}
                 />

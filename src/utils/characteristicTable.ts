@@ -1,5 +1,6 @@
 // 特徴表型定義
 export type CharacteristicTableData = {
+    id: string;
     tableName: string;
     tableData: CharacteristicTable;
 }[];
@@ -104,14 +105,17 @@ export const defaultCharacteristicTable: CharacteristicTable = [
 
 export const holeData: CharacteristicTableData = [
     {
+        id: "aaa",
         tableName: "特徴表",
         tableData: defaultCharacteristicTable
     },
     {
+        id: "bbb",
         tableName: "特徴表2",
         tableData: defaultCharacteristicTable
     },
     {
+        id: "ccc",
         tableName: "特徴表3",
         tableData: defaultCharacteristicTable
     }

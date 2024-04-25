@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import TabBar from './components/TabBar';
+import CustomizedMenus from "./components/DropDownMenu"
 
 function App() {
     const [focusIndex, setFocusIndex] = useState(0);
@@ -19,6 +20,7 @@ function App() {
             <div hidden={focusIndex !== 2}>
                 Item Tree
             </div>
+            <CustomizedMenus/>
         </>
     )
 }

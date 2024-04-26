@@ -32,7 +32,6 @@ export function CharacteristicTableProvider({children}: {children: ReactNode}){
     // 拡張機能のポップアップ起動時、chrome.storageからデータを読み出してstateに保存する
     useEffect(() => {
         getData().then((response: CharacteristicTableData[]) => {
-            console.log("黄泉だし", response)
             setCharacteristicTableData(response);
         });
     }, []);

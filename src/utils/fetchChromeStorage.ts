@@ -12,10 +12,10 @@ export async function getData(): Promise<CharacteristicTableData[]>{
 
     return new Promise<CharacteristicTableData[]>((resolve, _reject) => {
         chrome.storage.local.get(["data"], function(response){
-            try{
-                const data: CharacteristicTableData[] = response["data"] as CharacteristicTableData[]
+            if(response["data"]){
+                const data: CharacteristicTableData[] = response["data"] as CharacteristicTableData[];
                 resolve(data);
-            }catch(error) {
+            }else{
                 resolve(initialData);
             }
         });

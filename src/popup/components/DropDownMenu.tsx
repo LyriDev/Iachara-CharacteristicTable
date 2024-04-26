@@ -18,7 +18,7 @@ const StyledMenu = styled((props: MenuProps) => (
         }}
         {...props}
     />
-))(({ theme }) => ({
+))(({ /* theme */ }) => ({
     '& .MuiPaper-root': {
 
     }

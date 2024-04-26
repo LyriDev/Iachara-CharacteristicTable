@@ -49,10 +49,14 @@ export default function TabTitle({
             <span
                 style={{
                     position: "relative",
-                    paddingRight: ((focusIndex === index) ? "24px" : ""),
+                    paddingRight: ((focusIndex === index) ? "20px" : ""),
                 }}
             >
-                <span>
+                <span
+                    style={{
+                        color: (focusIndex === index) ? "#fff" : "#a7a7a7"
+                    }}
+                >
                     {characteristicTableData[index].tableName}
                 </span>
                 {(focusIndex === index) && (
@@ -60,7 +64,7 @@ export default function TabTitle({
                         style={{
                             position: "absolute",
                             marginTop: "-3px",
-                            right: "0",
+                            right: "",
                         }}
                     >
                         <ArrowDropDownIcon/>

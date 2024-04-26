@@ -6,7 +6,7 @@ export const theme = createTheme({
             main: "#fff" // プライマリーカラーを白色に設定
         },
         secondary: {
-            main: "rgba(0,0,0,0)" // セカンダリーカラーを無色に設定
+            main: "#a7a7a7" // セカンダリーカラーを灰色に設定
         },
         info: {
             main: "#2196F3" // インフォメーションカラーを青色に設定
@@ -19,13 +19,13 @@ export const theme = createTheme({
         button: {
             textTransform: "none",
             fontWeight: 'bold'
-        },
+        }
     },
     components: {
         MuiTab: {
             styleOverrides: {
                 root: {
-                    color: '#bdbdbd', // 非アクティブなタブの文字色を指定
+                    opacity: "1",
                 },
             },
         },

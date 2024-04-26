@@ -7,7 +7,7 @@ function App() {
     return (
         <div
             style={{
-                color: "#fff",
+                color: "white",
                 backgroundColor: "#3a3f44",
             }}
         >

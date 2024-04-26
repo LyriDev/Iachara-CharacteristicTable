@@ -29,11 +29,13 @@ export function CharacteristicTableProvider({children}: {children: ReactNode}){
     // 新しい特徴表を作成する関数
     function addTable(): number{
         setCharacteristicTableData((prev) => {
-            const copiedDefaultTable = [...defaultCharacteristicTable];
+            // const defaultTable = [...defaultCharacteristicTable];
+            const defaultTable: string[][] = Array.from({ length: 6 }, () => Array(10).fill(""));
+
             const newData = {
                 id: uuidv4(),
                 tableName: "特徴表",
-                tableData: copiedDefaultTable
+                tableData: defaultTable
             }
             return [...prev, newData];
         })

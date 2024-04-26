@@ -19,7 +19,6 @@ export default function TableTextarea({
         <TextField
             fullWidth
             multiline
-            rows={5}
             style={{
                 margin: 0
             }}

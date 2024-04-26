@@ -1,7 +1,6 @@
-import { useContext } from 'react';
 import { styled } from '@mui/material/styles';
-import { CharacteristicTableContext } from '../providers/CharacteristicTableProvider';
 import TableTextarea from './TableTextarea';
+import { Fragment } from 'react/jsx-runtime';
 
 const StyledTd = styled("td")({
     border: "1px white solid",
@@ -15,15 +14,11 @@ const DataTd = styled("td")({
     width: "25rem"
 });
 
-export default function TabTitle({
+export default function TabContent({
     focusIndex
 }: {
     focusIndex: number;
 }){
-    const {
-        characteristicTableData
-    } = useContext(CharacteristicTableContext);
-
     return (
         <table
             style={{
@@ -34,11 +29,11 @@ export default function TabTitle({
         >
             <tbody>
                 {[0, 1, 2, 3, 4, 5].map((parentIndex) => (
-                    <>
+                    <Fragment key={`parent-${parentIndex}`}>
                         <tr>
-                            <StyledTd key={`parent-${parentIndex}`} rowSpan={10}>{parentIndex + 1}</StyledTd>
-                            <StyledTd key={"child-0"}>1</StyledTd>
-                            <DataTd key={"child-0"}>
+                            <StyledTd rowSpan={10}>{parentIndex + 1}</StyledTd>
+                            <StyledTd>1</StyledTd>
+                            <DataTd>
                                 <TableTextarea
                                     focusIndex={focusIndex}
                                     parentIndex={parentIndex}
@@ -47,9 +42,9 @@ export default function TabTitle({
                             </DataTd>
                         </tr>
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((childIndex) => (
-                            <tr>
-                                <StyledTd key={`child-${childIndex}`}>{childIndex + 1}</StyledTd>
-                                <DataTd key={`data-${childIndex}`}>
+                            <tr key={`${parentIndex}-${childIndex}`}>
+                                <StyledTd >{childIndex + 1}</StyledTd>
+                                <DataTd>
                                     <TableTextarea
                                         focusIndex={focusIndex}
                                         parentIndex={parentIndex}
@@ -58,7 +53,7 @@ export default function TabTitle({
                                 </DataTd>
                             </tr>
                         ))}
-                    </>
+                    </Fragment>
                 ))}
             </tbody>
         </table>

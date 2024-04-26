@@ -50,20 +50,21 @@ export default function CustomizedMenus({
     focusIndex,
     setFocusIndex,
     anchorEl,
-    setAnchorEl
+    setAnchorEl,
+    setIsEditing
 }: {
     focusIndex: number;
     setFocusIndex: React.Dispatch<React.SetStateAction<number>>;
     anchorEl: HTMLElement | null;
-    setAnchorEl: React.Dispatch<React.SetStateAction<HTMLElement | null>>
+    setAnchorEl: React.Dispatch<React.SetStateAction<HTMLElement | null>>;
+    setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
     const {
-        addTable,
         removeTable,
         swapTable
     } = useContext(CharacteristicTableContext);
 
-    function handleClose(){
+    async function handleClose(){
         setAnchorEl(null);
     };
 
@@ -73,7 +74,16 @@ export default function CustomizedMenus({
             open={Boolean(anchorEl)}
             onClose={handleClose}
         >
-            <MenuItem onClick={handleClose}>名前を変更</MenuItem>
+            <MenuItem
+                onClick={() => {
+                    handleClose().then(() => {
+                        // 現在タブをタブ名編集中にする
+                        setIsEditing(true);
+                    });
+                }}
+            >
+                名前を変更
+            </MenuItem>
             <MenuItem
                 onClick={() => {
                     removeTable(focusIndex);

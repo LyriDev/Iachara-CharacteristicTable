@@ -8,6 +8,7 @@ type ContextInfo = {
     addTable(): number;
     removeTable(index: number): void;
     swapTable(index: number, direction: 1 | -1): void;
+    changeTabName(index: number, newValue: string): void;
 };
 
 const defaultContext: ContextInfo = {
@@ -15,7 +16,8 @@ const defaultContext: ContextInfo = {
     setCharacteristicTableData: () => {},
     addTable: () => 0,
     removeTable: () => {},
-    swapTable: () => {}
+    swapTable: () => {},
+    changeTabName: () => {}
 };
 
 export const CharacteristicTableContext = createContext<ContextInfo>(defaultContext);
@@ -46,7 +48,7 @@ export function CharacteristicTableProvider({children}: {children: ReactNode}){
     }
 
     // 指定された特徴表のindexを+1/-1する関数
-    function swapTable(index: number, direction: 1|-1){
+    function swapTable(index: number, direction: 1 | -1){
         // 配列の要素を1つ右か左に入れ替えた際のindexを求める
         const nextIndex: number = index + direction;
         if((0 > nextIndex) || (characteristicTableData.length <= nextIndex)){
@@ -64,6 +66,15 @@ export function CharacteristicTableProvider({children}: {children: ReactNode}){
         })
     }
 
+    // 指定されたタブ名を変更する関数
+    function changeTabName(index: number, newValue: string){
+        setCharacteristicTableData((prev) => {
+            const copiedTable = [...prev];
+            copiedTable[index].tableName = newValue;
+            return copiedTable;
+        })
+    }
+
     return (
         <CharacteristicTableContext.Provider
                 value={{
@@ -71,8 +82,8 @@ export function CharacteristicTableProvider({children}: {children: ReactNode}){
                     setCharacteristicTableData,
                     addTable,
                     removeTable,
-                    swapTable
-
+                    swapTable,
+                    changeTabName
                 }}
         >
             {children}

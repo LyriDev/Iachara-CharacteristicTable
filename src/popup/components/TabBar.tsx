@@ -18,12 +18,13 @@ export default function TabBar({
     return (
         <Tabs
             value={focusIndex}
+            variant="scrollable"
+            scrollButtons="auto"
             onChange={(_event: React.SyntheticEvent, newValue: number) => setFocusIndex(newValue)}
         >
             {characteristicTableData.map((tableData, index) => (
                 <TabHeader
                     key={tableData.id}
-                    tableName={tableData.tableName}
                     index={index}
                     focusIndex={focusIndex}
                     setFocusIndex={setFocusIndex}

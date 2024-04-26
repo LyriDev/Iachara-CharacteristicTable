@@ -8,6 +8,8 @@ export type CharacteristicTableData = {
 export type CharacteristicTable = string[][];
 
 // 特徴表データ
+export const defaultTableName: string = "特徴表";
+
 export const defaultCharacteristicTable: CharacteristicTable = [
     [
         "1-1【風邪を引かない】\n君は難しいことなど考えず、元気いっぱいに育った。INT-1、CON+2",

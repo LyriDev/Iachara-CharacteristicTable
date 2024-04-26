@@ -25,8 +25,7 @@ export default function TabContent({
             style={{
                 padding: "0.5rem",
                 paddingBottom: "3rem",
-                overflowY: "hidden",
-                position: "relative"
+                overflowY: "auto",
             }}
         >
             <table

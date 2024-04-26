@@ -9,10 +9,13 @@ function App() {
     return (
         <Paper
             style={{
+                display: "flex",
+                flexDirection: "column",
                 color: "white",
                 backgroundColor: "#3a3f44",
                 width: "40rem",
-                height: "40rem"
+                height: "35rem",
+                overflowY: "hidden"
             }}
             sx={{ boxShadow: 3 }}
         >

@@ -9,7 +9,7 @@ export default function Footer(){
     return (
         <div
             style={{
-                position: "absolute",
+                position: "fixed",
                 bottom: "1rem",
                 right: "1rem"
             }}

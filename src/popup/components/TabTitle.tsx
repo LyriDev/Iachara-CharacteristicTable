@@ -17,7 +17,7 @@ export default function TabTitle({
 }){
     const {
         characteristicTableData,
-        changeTabName
+        changeTableName
     } = useContext(CharacteristicTableContext);
 
     return (
@@ -27,7 +27,7 @@ export default function TabTitle({
                 color="info"
                 autoFocus
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    changeTabName(index, event.target.value);
+                    changeTableName(index, event.target.value);
                 }}
                 onBlur={() => {
                     // タブ名編集中のタブ以外がクリックされた場合、タブ名編集モードを終了する
@@ -35,7 +35,7 @@ export default function TabTitle({
 
                     // 特長表名に不正な値が設定されようとしたとき、代わりに「特徴表」というタブ名を設定する
                     if(characteristicTableData[index].tableName.trim() === ""){
-                        changeTabName(index, defaultTableName);
+                        changeTableName(index, defaultTableName);
                     }
                 }}
                 onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {

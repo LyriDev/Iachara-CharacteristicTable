@@ -8,7 +8,8 @@ type ContextInfo = {
     addTable(): number;
     removeTable(index: number): void;
     swapTable(index: number, direction: 1 | -1): void;
-    changeTabName(index: number, newValue: string): void;
+    changeTableName(index: number, newValue: string): void;
+    changeTableData(focusIndex: number, parentIndex: number, childIndex: number, newValue: string): void;
 };
 
 const defaultContext: ContextInfo = {
@@ -17,7 +18,8 @@ const defaultContext: ContextInfo = {
     addTable: () => 0,
     removeTable: () => {},
     swapTable: () => {},
-    changeTabName: () => {}
+    changeTableName: () => {},
+    changeTableData: () => {}
 };
 
 export const CharacteristicTableContext = createContext<ContextInfo>(defaultContext);
@@ -69,10 +71,19 @@ export function CharacteristicTableProvider({children}: {children: ReactNode}){
     }
 
     // 指定されたタブ名を変更する関数
-    function changeTabName(index: number, newValue: string){
+    function changeTableName(index: number, newValue: string){
         setCharacteristicTableData((prev) => {
             const copiedTable = [...prev];
             copiedTable[index].tableName = newValue;
+            return copiedTable;
+        })
+    }
+
+    // 指定された特徴表を編集する関数
+    function changeTableData(focusIndex: number, parentIndex: number, childIndex: number, newValue: string){
+        setCharacteristicTableData((prev) => {
+            const copiedTable = [...prev];
+            copiedTable[focusIndex].tableData[parentIndex][childIndex] = newValue;
             return copiedTable;
         })
     }
@@ -85,7 +96,8 @@ export function CharacteristicTableProvider({children}: {children: ReactNode}){
                     addTable,
                     removeTable,
                     swapTable,
-                    changeTabName
+                    changeTableName,
+                    changeTableData
                 }}
         >
             {children}

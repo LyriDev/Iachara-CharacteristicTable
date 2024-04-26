@@ -43,7 +43,7 @@ export default function TabContent({
                         </tr>
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((childIndex) => (
                             <tr key={`${parentIndex}-${childIndex}`}>
-                                <StyledTd >{childIndex + 1}</StyledTd>
+                                <StyledTd>{childIndex + 1}</StyledTd>
                                 <DataTd>
                                     <TableTextarea
                                         focusIndex={focusIndex}

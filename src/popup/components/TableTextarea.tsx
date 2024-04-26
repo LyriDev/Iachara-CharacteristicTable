@@ -12,7 +12,8 @@ export default function TableTextarea({
     childIndex: number;
 }){
     const {
-        characteristicTableData
+        characteristicTableData,
+        changeTableData
     } = useContext(CharacteristicTableContext);
 
     return (
@@ -23,6 +24,10 @@ export default function TableTextarea({
                 margin: 0
             }}
             value={characteristicTableData[focusIndex].tableData[parentIndex][childIndex]}
+            onChange={(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+                const newValue: string = event.target.value;
+                changeTableData(focusIndex, parentIndex, childIndex, newValue);
+            }}
         />
     )
 };

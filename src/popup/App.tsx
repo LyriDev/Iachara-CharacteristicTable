@@ -5,7 +5,12 @@ function App() {
     const [focusIndex, setFocusIndex] = useState(0);
 
     return (
-        <>
+        <div
+            style={{
+                color: "#fff",
+                backgroundColor: "#3a3f44",
+            }}
+        >
             <TabBar
                 focusIndex={focusIndex}
                 setFocusIndex={setFocusIndex}
@@ -19,7 +24,7 @@ function App() {
             <div hidden={focusIndex !== 2}>
                 Item Tree
             </div>
-        </>
+        </div>
     )
 }
 

@@ -18,6 +18,7 @@ export default function TabHeader({
     return (
         <>
             <Tab
+                disableRipple={isEditing}
                 label={
                     <TabTitle
                         index={index}

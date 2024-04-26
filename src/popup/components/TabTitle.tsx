@@ -32,7 +32,6 @@ export default function TabTitle({
                 onBlur={() => {
                     // タブ名編集中のタブ以外がクリックされた場合、タブ名編集モードを終了する
                     setIsEditing(false);
-                    console.log("hoge")
 
                     // 特長表名に不正な値が設定されようとしたとき、代わりに「特徴表」というタブ名を設定する
                     if(characteristicTableData[index].tableName.trim() === ""){
@@ -48,20 +47,21 @@ export default function TabTitle({
             />
         ) : (
             <span
-            style={{
-                position: "relative",
-                paddingRight: ((focusIndex === index) ? "24px" : ""),
-            }}>
+                style={{
+                    position: "relative",
+                    paddingRight: ((focusIndex === index) ? "24px" : ""),
+                }}
+            >
                 <span>
                     {characteristicTableData[index].tableName}
                 </span>
                 {(focusIndex === index) && (
                     <span
-                    style={{
-                        position: "absolute",
-                        marginTop: "-3px",
-                        right: "-6px",
-                    }}
+                        style={{
+                            position: "absolute",
+                            marginTop: "-3px",
+                            right: "0",
+                        }}
                     >
                         <ArrowDropDownIcon/>
                     </span>

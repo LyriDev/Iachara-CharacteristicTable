@@ -1,7 +1,7 @@
 import { CharacteristicTableData, defaultCharacteristicTable } from "./characteristicTable";
 
 // chrome.storageから特徴表のデータを取得する関数
-export async function getTableData(): Promise<CharacteristicTableData[]>{
+export async function getData(): Promise<CharacteristicTableData[]>{
     const initialData: CharacteristicTableData[] = [ //デフォルト値
         {
             id: "initial",
@@ -23,7 +23,7 @@ export async function getTableData(): Promise<CharacteristicTableData[]>{
 }
 
 // chrome.storageに特徴表のデータを保存する関数
-export async function saveTableData(data: CharacteristicTableData[]): Promise<void>{
+export async function saveData(data: CharacteristicTableData[]): Promise<void>{
     return new Promise<void>((resolve, _reject) => {
         try{
             chrome.storage.local.set({data}, function() {

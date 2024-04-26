@@ -5,7 +5,7 @@ import SaveIcon from '@mui/icons-material/Save';
 
 export default function SaveButton(){
     const {
-        
+        saveTableData
     } = useContext(CharacteristicTableContext);
 
     return (
@@ -13,6 +13,7 @@ export default function SaveButton(){
             variant="contained"
             startIcon={<SaveIcon />}
             color="success"
+            onClick={saveTableData}
         >
             保存
         </Button>

@@ -85,21 +85,11 @@ export const defaultCharacteristicTable: CharacteristicTable = [
     ]
 ]
 
-export const holeData: CharacteristicTableData[] = [
+export const dummyData: CharacteristicTableData[] = [
     {
-        id: "aaa",
+        id: "dummy",
         tableName: "特徴表",
-        tableData: defaultCharacteristicTable
-    },
-    {
-        id: "bbb",
-        tableName: "特徴表2",
-        tableData: defaultCharacteristicTable
-    },
-    {
-        id: "ccc",
-        tableName: "特徴表3",
-        tableData: defaultCharacteristicTable
+        tableData: Array.from({ length: 6 }, () => Array(10).fill(""))
     }
 ]
 

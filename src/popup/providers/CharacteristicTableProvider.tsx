@@ -1,32 +1,41 @@
-import { createContext, useState, ReactNode } from 'react';
-import { CharacteristicTableData, defaultCharacteristicTable, holeData } from '../../utils/characteristicTable';
+import { useEffect, createContext, useState, ReactNode } from 'react';
+import { CharacteristicTableData, dummyData } from '../../utils/characteristicTable';
 import { v4 as uuidv4 } from 'uuid';
+import { getData, saveData } from '../../utils/fetchChromeStorage';
 
 type ContextInfo = {
     characteristicTableData: CharacteristicTableData[];
-    setCharacteristicTableData: React.Dispatch<React.SetStateAction<CharacteristicTableData[]>>;
     addTable(): number;
     removeTable(index: number): void;
     swapTable(index: number, direction: 1 | -1): void;
     changeTableName(index: number, newValue: string): void;
     changeTableData(focusIndex: number, parentIndex: number, childIndex: number, newValue: string): void;
+    saveTableData(): Promise<void>;
 };
 
 const defaultContext: ContextInfo = {
     characteristicTableData: [],
-    setCharacteristicTableData: () => {},
     addTable: () => 0,
     removeTable: () => {},
     swapTable: () => {},
     changeTableName: () => {},
-    changeTableData: () => {}
+    changeTableData: () => {},
+    saveTableData: () => Promise.resolve()
 };
 
 export const CharacteristicTableContext = createContext<ContextInfo>(defaultContext);
 
 // 特徴表のデータを管理するcontext
 export function CharacteristicTableProvider({children}: {children: ReactNode}){
-    const [characteristicTableData, setCharacteristicTableData] = useState<CharacteristicTableData[]>(holeData);
+    const [characteristicTableData, setCharacteristicTableData] = useState<CharacteristicTableData[]>(dummyData);
+
+    // 拡張機能のポップアップ起動時、chrome.storageからデータを読み出してstateに保存する
+    useEffect(() => {
+        getData().then((response: CharacteristicTableData[]) => {
+            console.log("黄泉だし", response)
+            setCharacteristicTableData(response);
+        });
+    }, []);
 
     // 新しい特徴表を作成する関数
     function addTable(): number{
@@ -94,16 +103,21 @@ export function CharacteristicTableProvider({children}: {children: ReactNode}){
         })
     }
 
+    // chrome.storageに特徴表のデータを保存する関数
+    async function saveTableData(): Promise<void>{
+        await saveData(characteristicTableData);
+    }
+
     return (
         <CharacteristicTableContext.Provider
                 value={{
                     characteristicTableData,
-                    setCharacteristicTableData,
                     addTable,
                     removeTable,
                     swapTable,
                     changeTableName,
-                    changeTableData
+                    changeTableData,
+                    saveTableData
                 }}
         >
             {children}

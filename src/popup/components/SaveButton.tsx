@@ -1,19 +1,18 @@
 import { useContext } from 'react'
 import { CharacteristicTableContext } from '../providers/CharacteristicTableProvider';
 import { Button } from '@mui/material';
+import SaveIcon from '@mui/icons-material/Save';
 
-export default function Footer(){
+export default function SaveButton(){
     const {
-        characteristicTableData
+        
     } = useContext(CharacteristicTableContext);
 
     return (
         <Button
-            style={{
-                position: "fixed",
-                bottom: "1rem",
-                right: "1rem"
-            }}
+            variant="contained"
+            startIcon={<SaveIcon />}
+            color="success"
         >
             保存
         </Button>

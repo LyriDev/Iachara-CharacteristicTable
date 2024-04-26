@@ -1,20 +1,17 @@
-import { useContext } from 'react'
-import { CharacteristicTableContext } from '../providers/CharacteristicTableProvider';
+import SaveButton from './SaveButton';
 
 export default function Footer(){
-    const {
-        characteristicTableData
-    } = useContext(CharacteristicTableContext);
-
     return (
         <div
             style={{
                 position: "fixed",
-                bottom: "1rem",
-                right: "1rem"
+                marginRight: "2rem",
+                padding: "0.5rem",
+                bottom: "0rem",
+                right: "0rem"
             }}
         >
-            hoge
+            <SaveButton/>
         </div>
     )
 };

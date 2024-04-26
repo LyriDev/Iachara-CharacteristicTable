@@ -31,6 +31,9 @@ export const theme = createTheme({
         },
         MuiTabs: {
             styleOverrides: {
+                root: {
+                    backgroundColor: "#23262a"
+                },
                 indicator: {
                     backgroundColor: '#f50057', // 下線の色を赤に設定
                 }

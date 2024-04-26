@@ -46,9 +46,15 @@ export function CharacteristicTableProvider({children}: {children: ReactNode}){
 
     // 指定された特徴表を削除する関数
     function removeTable(index: number){
-        setCharacteristicTableData((prev) => {
-            return prev.filter((_, i) => i !== index);;
-        })
+        if(characteristicTableData.length <= 1) throw new Error("これ以上タブを削除できません");
+
+        const checkText: string = `「${characteristicTableData[index].tableName}」を本当に削除しますか？`
+        const shouldDelete: boolean = window.confirm(checkText);
+        if(shouldDelete){
+            setCharacteristicTableData((prev) => {
+                return prev.filter((_, i) => i !== index);;
+            })
+        }
     }
 
     // 指定された特徴表のindexを+1/-1する関数

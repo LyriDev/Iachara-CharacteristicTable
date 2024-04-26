@@ -38,6 +38,7 @@ export default function CustomizedMenus({
     setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
     const {
+        characteristicTableData,
         removeTable,
         swapTable
     } = useContext(CharacteristicTableContext);
@@ -63,8 +64,12 @@ export default function CustomizedMenus({
                 名前を変更
             </MenuItem>
             <MenuItem
+                disabled={characteristicTableData.length <= 1}
                 onClick={() => {
-                    removeTable(focusIndex);
+                    // 一番最後のタブを消す場合は、選択中のタブを一つ若いタブに移す
+                    const needShiftIndex: boolean = (focusIndex === characteristicTableData.length - 1);
+                    removeTable(focusIndex); // 選択中のタブを削除する
+                    if(needShiftIndex) setFocusIndex((prev) => prev - 1);
                     handleClose();
                 }}
             >
@@ -72,6 +77,7 @@ export default function CustomizedMenus({
             </MenuItem>
             <Divider sx={{ my: 0.5, backgroundColor: "rgba(255, 255, 255, 0.12)" }} />
             <MenuItem
+                disabled={focusIndex === 0}
                 onClick={() => {
                     swapTable(focusIndex, -1);
                     setFocusIndex((prev) => prev - 1);
@@ -81,6 +87,7 @@ export default function CustomizedMenus({
                 左に移動
             </MenuItem>
             <MenuItem
+                disabled={focusIndex === characteristicTableData.length - 1}
                 onClick={() => {
                     swapTable(focusIndex, 1);
                     setFocusIndex((prev) => prev + 1);

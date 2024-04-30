@@ -1,14 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { menuButtonQuery } from '../utils/documentQueries';
+import { menuButtonQuery, portalQuery } from '../utils/documentQueries';
 import Providers from './providers/Providers';
 import App from './App';
 
-function addPortalRoot(): void{ // 特徴表結果用ポータルを追加するためのルート要素を作成する関数
+async function addPortalRoot(): Promise<void>{ // 特徴表結果用ポータルを追加するためのルート要素を作成する関数
+    // ポータルを追加するための要素を取得する
+    let targetElement: HTMLElement|null = await challengeQuery(portalQuery);
+    if (!targetElement){
+         // 一定時間待機してもターゲットとなる要素が見つからなければ処理を止める
+        throw new Error("特徴表欄を追加できませんでした")
+    }
+
     // ポータルを追加するためのルート要素を作成
     const portalRoot = document.createElement('div');
     portalRoot.id = 'portal-root-characteristicTable';
-    document.body.appendChild(portalRoot);
+    targetElement.appendChild(portalRoot);
 }
 
 async function addCharacteristicTableButton(): Promise<void>{ // 特徴表ボタンを追加する関数
@@ -22,7 +29,7 @@ async function addCharacteristicTableButton(): Promise<void>{ // 特徴表ボタ
     // コンテナを追加する
     const container: HTMLElement = document.createElement("div");
     container.style.position = "relative";
-    container.style.right = "6rem";
+    container.style.right = "5.5rem";
     targetElement.style.position = "absolute";
     targetElement.after(container);
 
@@ -66,6 +73,10 @@ async function challengeQuery(query: string): Promise<HTMLElement | null>{ // �
     });
 }
 
-console.log("いあきゃら特徴表")
-addPortalRoot();
-addCharacteristicTableButton();
+async function main(){
+    console.log("いあきゃら特徴表")
+    await addPortalRoot();
+    await addCharacteristicTableButton();
+}
+
+main();

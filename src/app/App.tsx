@@ -1,23 +1,24 @@
-// import { useState } from 'react'
-import Button from '@mui/material/Button';
+import { useState } from 'react'
 import RoleResultArea from './components/RoleResultArea';
+import RoleButton from './components/RoleButton';
 
-export default function App() {
-    // const [focusIndex, setFocusIndex] = useState(0);
+export default function App(){
+    const [roleResultVisible, setRoleResultVisible] = useState<boolean>(false);
+
+    // 特徴表欄を表示し、特徴表をロールする関数
+    function roleCharacteristicTable(){
+        setRoleResultVisible(true);
+    }
 
     return (
         <>
-            <Button
-                variant="contained"
-                disableRipple
-                style={{
-                    textWrap: "nowrap",
-                    border: "1px solid rgb(112, 112, 112)"
-                }}
-            >
-                特徴表
-            </Button>
-            <RoleResultArea/>
+            <RoleButton
+                roleCharacteristicTable={roleCharacteristicTable}
+            />
+            <RoleResultArea
+                roleResultVisible={roleResultVisible}
+                setRoleResultVisible={setRoleResultVisible}
+            />
         </>
     )
 }

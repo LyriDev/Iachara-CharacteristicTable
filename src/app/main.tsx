@@ -34,7 +34,7 @@ async function addCharacteristicTableButton(): Promise<void>{ // 特徴表ボタ
     // コンテナを追加する
     const container: HTMLElement = document.createElement("div");
     container.style.position = "relative";
-    container.style.right = "5.5rem";
+    container.style.right = "8rem";
     targetElement.style.position = "absolute";
     targetElement.after(container);
 

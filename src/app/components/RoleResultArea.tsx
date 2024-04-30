@@ -1,17 +1,23 @@
 import ReactDOM from 'react-dom';
 
-export default function RoleResultArea() {
+export default function RoleResultArea({
+    roleResultVisible,
+    setRoleResultVisible
+}: {
+    roleResultVisible: boolean;
+    setRoleResultVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}){
     const portal: HTMLElement = document.getElementById("portal-root-characteristicTable") || document.createElement("div")
-    console.log({portal})
 
     return (
         ReactDOM.createPortal(
-            true && (
+            roleResultVisible && (
                 <div
                     style={{
                         backgroundColor: "red"
-                }}
+                    }}
                 >
+                    <button onClick={() => setRoleResultVisible(false)}>x</button>
                     hoge
                 </div>
             ),

@@ -22,9 +22,8 @@ const manifest = defineManifest({
     ],
     content_scripts: [
         {
-            matches: ["https://iachara.com/edit/*"],
-            js: ["src/app/main.tsx"],
-            run_at: "document_idle"
+            matches: ["https://iachara.com/*"],
+            js: ["src/app/main.tsx"]
         },
     ],
 });

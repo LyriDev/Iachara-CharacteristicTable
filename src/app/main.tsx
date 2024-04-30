@@ -49,7 +49,6 @@ async function addCharacteristicTableButton(): Promise<void>{ // 特徴表ボタ
 }
 
 async function challengeQuery(query: string): Promise<HTMLElement | null>{ // 指定された要素が見つかるまで画面更新を待機する関数
-    console.log("challengeQuery")
     let targetElement: HTMLElement | null = null;
 
     // 監視するDOMノードを取得
@@ -61,7 +60,7 @@ async function challengeQuery(query: string): Promise<HTMLElement | null>{ // �
             // 変更が検出された際に実行されるコールバック関数
             targetElement = document.querySelector(query);
             if(targetElement !== null){
-                console.log(`目標の要素を発見しました\ndocument.querySelector("${query}")`,targetElement);
+                // console.log(`目標の要素を発見しました\ndocument.querySelector("${query}")`,targetElement);
                 observer.disconnect(); // DOMの監視を終了する
                 resolve(targetElement); // 結果を返してPromiseを解決する
             }
@@ -78,10 +77,38 @@ async function challengeQuery(query: string): Promise<HTMLElement | null>{ // �
     });
 }
 
+// URLが変更された際、変更先URLが特定のURLの場合、指定の関数を実行する関数
+let oldUrl: string | null = location.href; // URLの記憶用
+function watchUrlChange(targetUrl: RegExp, func: () => {}){
+    const observer = new MutationObserver(() => {
+        const newUrl: string = location.href;
+        if(oldUrl !== newUrl){
+           oldUrl = newUrl; // oldUrlを更新
+            console.log("【urlが変更されました】", newUrl)
+            // URLが変更された際の処理
+            if(targetUrl.test(newUrl)){
+                // editページの場合、拡張機能を実行する
+                console.log("【urlがeditに変更されました】", newUrl)
+                func();
+            }
+        }
+    });
+    observer.observe(document.body, {
+        subtree: true,
+        childList: true, 
+        attributes: true,
+        characterData: true
+    });
+}
+
+// 拡張機能を実行する関数
 async function main(){
     console.log("いあきゃら特徴表")
     await addPortalRoot();
     await addCharacteristicTableButton();
 }
 
-main();
+const regexPattern: RegExp = /^https:\/\/iachara\.com\/edit\/.*/;
+main(); // 拡張機能を実行する
+watchUrlChange(regexPattern, main); // いあきゃらはMPAなので、URLが変更された場合は拡張機能を再実行する
+

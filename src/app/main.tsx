@@ -40,6 +40,25 @@ async function addCharacteristicTableButton(data: CharacteristicTableData[]): Pr
     targetElement.style.position = "absolute";
     targetElement.after(container);
 
+    // ドロップダウンメニューが開かれたときのbodyのoverflowを無効化する
+    // スタイルシートに新しいルールを追加する
+    const styleElement: HTMLStyleElement = document.createElement('style');
+    document.head.appendChild(styleElement);
+    const styleSheet: CSSStyleSheet = styleElement.sheet as CSSStyleSheet;
+    styleSheet.insertRule(
+        `body {
+            padding: 0 !important;
+            overflow: visible !important;
+        }`,
+        styleSheet?.cssRules.length
+    );
+    styleSheet.insertRule(
+        `.white-color textarea {
+            color: white !important;
+        }`,
+        styleSheet?.cssRules.length
+    );
+
     ReactDOM.render(
         <React.StrictMode>
             <Providers characteristicTableData={data}>

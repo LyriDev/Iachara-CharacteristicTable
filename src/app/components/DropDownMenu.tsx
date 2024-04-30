@@ -2,19 +2,19 @@ import { useContext } from 'react';
 import { styled } from '@mui/material/styles';
 import Menu, { MenuProps } from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import Divider from '@mui/material/Divider';
 import { CharacteristicTableContext } from '../providers/CharacteristicTableProvider';
 
 const StyledMenu = styled((props: MenuProps) => (
     <Menu
+        color="primary"
         elevation={0}
         anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
+            vertical: "top",
+            horizontal: "right"
         }}
         transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
+            vertical: "bottom",
+            horizontal: "right"
         }}
         {...props}
     />
@@ -24,11 +24,16 @@ const StyledMenu = styled((props: MenuProps) => (
     }
 }));
 
-export default function DropDownMenu() {
+export default function DropDownMenu({
+    anchorEl,
+    setAnchorEl
+}: {
+    anchorEl: HTMLElement | null;
+    setAnchorEl: React.Dispatch<React.SetStateAction<HTMLElement | null>>;
+}) {
     const {
         characteristicTableData,
-        removeTable,
-        swapTable
+        setTableIndex
     } = useContext(CharacteristicTableContext);
 
     async function handleClose(){
@@ -41,49 +46,19 @@ export default function DropDownMenu() {
             open={Boolean(anchorEl)}
             onClose={handleClose}
         >
-            <MenuItem
-                onClick={() => {
-                    handleClose().then(() => {
-                        // 現在タブをタブ名編集中にする
-                        setIsEditing(true);
-                    });
-                }}
-            >
-                名前を変更
-            </MenuItem>
-            <MenuItem
-                disabled={characteristicTableData.length <= 1}
-                onClick={() => {
-                    // 一番最後のタブを消す場合は、選択中のタブを一つ若いタブに移す
-                    const needShiftIndex: boolean = (focusIndex === characteristicTableData.length - 1);
-                    removeTable(focusIndex); // 選択中のタブを削除する
-                    if(needShiftIndex) setFocusIndex((prev) => prev - 1);
-                    handleClose();
-                }}
-            >
-                削除
-            </MenuItem>
-            <Divider sx={{ my: 0.5, backgroundColor: "rgba(255, 255, 255, 0.12)" }} />
-            <MenuItem
-                disabled={focusIndex === 0}
-                onClick={() => {
-                    swapTable(focusIndex, -1);
-                    setFocusIndex((prev) => prev - 1);
-                    handleClose();
-                }}
-            >
-                左に移動
-            </MenuItem>
-            <MenuItem
-                disabled={focusIndex === characteristicTableData.length - 1}
-                onClick={() => {
-                    swapTable(focusIndex, 1);
-                    setFocusIndex((prev) => prev + 1);
-                    handleClose();
-                }}
-            >
-                右に移動
-            </MenuItem>
+            {characteristicTableData.map((tableData, index) => (
+                <MenuItem
+                    disableRipple
+                    onClick={() => {
+                        handleClose().then(() => {
+                            // 指定した特徴表を選択状態にする
+                            setTableIndex(index);
+                        });
+                    }}
+                >
+                    {tableData.tableName}
+                </MenuItem>
+            ))}
         </StyledMenu>
     );
 }

@@ -1,6 +1,8 @@
-import { useContext } from 'react';
 import ReactDOM from 'react-dom';
-import { CharacteristicTableContext } from '../providers/CharacteristicTableProvider';
+import RoleResult from './RoleResult';
+import NumberView from './NumberView';
+import CloseButton from './CloseButton';
+import CopyButton from './CopyButton';
 
 export default function RoleResultArea({
     roleResultVisible,
@@ -9,8 +11,6 @@ export default function RoleResultArea({
     roleResultVisible: boolean;
     setRoleResultVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }){
-    const { characteristicTableData } = useContext(CharacteristicTableContext);
-
     const portal: HTMLElement = document.getElementById("portal-root-characteristicTable") || document.createElement("div")
 
     return (
@@ -18,11 +18,16 @@ export default function RoleResultArea({
             roleResultVisible && (
                 <div
                     style={{
-                        backgroundColor: "red"
+                        padding: "8px",
+                        backgroundColor: "white"
                     }}
                 >
-                    <button onClick={() => setRoleResultVisible(false)}>x</button>
-                    {characteristicTableData[0].tableData[0][0]}
+                    <RoleResult/>
+                    <NumberView/>
+                    <CopyButton/>
+                    <CloseButton
+                        setRoleResultVisible={setRoleResultVisible}
+                    />
                 </div>
             ),
             portal

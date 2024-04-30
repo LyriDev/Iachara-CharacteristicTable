@@ -29,5 +29,8 @@ const manifest = defineManifest({
 });
 
 export default defineConfig({
-    plugins: [react(), crx({ manifest })],
+    plugins: [
+        react(),
+        crx({ manifest })
+    ]
 });

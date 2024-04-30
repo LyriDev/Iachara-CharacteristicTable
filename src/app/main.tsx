@@ -78,12 +78,12 @@ async function challengeQuery(query: string): Promise<HTMLElement | null>{ // �
 }
 
 // URLが変更された際、変更先URLが特定のURLの場合、指定の関数を実行する関数
-let oldUrl: string | null = location.href; // URLの記憶用
+let urlRef: string | null = location.href; // URLの記憶用
 function watchUrlChange(targetUrl: RegExp, func: () => {}){
     const observer = new MutationObserver(() => {
         const newUrl: string = location.href;
-        if(oldUrl !== newUrl){
-           oldUrl = newUrl; // oldUrlを更新
+        if(urlRef !== newUrl){
+            urlRef = newUrl; // urlRefを更新
             console.log("【urlが変更されました】", newUrl)
             // URLが変更された際の処理
             if(targetUrl.test(newUrl)){
@@ -108,7 +108,8 @@ async function main(){
     await addCharacteristicTableButton();
 }
 
+// editページの場合、あるいは他のページからeditページに遷移した場合、拡張機能を実行する
 const regexPattern: RegExp = /^https:\/\/iachara\.com\/edit\/.*/;
-main(); // 拡張機能を実行する
+if(regexPattern.test(urlRef)) main(); // 起動時にeditページの場合、拡張機能を実行する
 watchUrlChange(regexPattern, main); // いあきゃらはMPAなので、URLが変更された場合は拡張機能を再実行する
 

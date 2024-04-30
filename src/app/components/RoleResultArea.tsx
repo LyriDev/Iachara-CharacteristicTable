@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import ReactDOM from 'react-dom';
+import { CharacteristicTableContext } from '../providers/CharacteristicTableProvider';
 
 export default function RoleResultArea({
     roleResultVisible,
@@ -7,6 +9,8 @@ export default function RoleResultArea({
     roleResultVisible: boolean;
     setRoleResultVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }){
+    const { characteristicTableData } = useContext(CharacteristicTableContext);
+
     const portal: HTMLElement = document.getElementById("portal-root-characteristicTable") || document.createElement("div")
 
     return (
@@ -18,7 +22,7 @@ export default function RoleResultArea({
                     }}
                 >
                     <button onClick={() => setRoleResultVisible(false)}>x</button>
-                    hoge
+                    {characteristicTableData[0].tableData[0][0]}
                 </div>
             ),
             portal

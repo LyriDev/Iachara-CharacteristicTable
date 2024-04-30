@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { menuButtonQuery, portalQuery } from '../utils/documentQueries';
 import Providers from './providers/Providers';
 import App from './App';
+import { CharacteristicTableData } from '../utils/characteristicTable';
+import { getData } from '../utils/fetchChromeStorage';
 
 async function addPortalRoot(): Promise<void>{ // 特徴表結果用ポータルを追加するためのルート要素を作成する関数
     // ポータルを追加するための要素を取得する
@@ -23,7 +25,7 @@ async function addPortalRoot(): Promise<void>{ // 特徴表結果用ポータル
     portalRoot.style.order = "1";
 }
 
-async function addCharacteristicTableButton(): Promise<void>{ // 特徴表ボタンを追加する関数
+async function addCharacteristicTableButton(data: CharacteristicTableData[]): Promise<void>{ // 特徴表ボタンを追加する関数
     // ボタンを追加するための要素を取得する
     let targetElement: HTMLElement|null = await challengeQuery(menuButtonQuery);
     if (!targetElement){
@@ -40,7 +42,7 @@ async function addCharacteristicTableButton(): Promise<void>{ // 特徴表ボタ
 
     ReactDOM.render(
         <React.StrictMode>
-            <Providers>
+            <Providers characteristicTableData={data}>
                 <App/>
             </Providers>
         </React.StrictMode>,
@@ -78,7 +80,7 @@ async function challengeQuery(query: string): Promise<HTMLElement | null>{ // �
 }
 
 // URLが変更された際、変更先URLが特定のURLの場合、指定の関数を実行する関数
-let urlRef: string | null = location.href; // URLの記憶用
+let urlRef: string = location.href; // URLの記憶用
 function watchUrlChange(targetUrl: RegExp, func: () => {}){
     const observer = new MutationObserver(() => {
         const newUrl: string = location.href;
@@ -102,14 +104,21 @@ function watchUrlChange(targetUrl: RegExp, func: () => {}){
 }
 
 // 拡張機能を実行する関数
-async function main(){
+async function main(data: CharacteristicTableData[]){
     console.log("いあきゃら特徴表")
     await addPortalRoot();
-    await addCharacteristicTableButton();
+    await addCharacteristicTableButton(data);
 }
 
-// editページの場合、あるいは他のページからeditページに遷移した場合、拡張機能を実行する
-const regexPattern: RegExp = /^https:\/\/iachara\.com\/edit\/.*/;
-if(regexPattern.test(urlRef)) main(); // 起動時にeditページの場合、拡張機能を実行する
-watchUrlChange(regexPattern, main); // いあきゃらはMPAなので、URLが変更された場合は拡張機能を再実行する
+// ローカルストレージからデータを読み込んだら、拡張機能を実行する
+getData().then((response) => {
+    // 目的のページのURLの正規表現
+    const regexPattern: RegExp = /^https:\/\/iachara\.com\/edit\/.*/;
 
+    // editページの場合、あるいは他のページからeditページに遷移した場合、拡張機能を実行する
+    // 起動時にeditページの場合、拡張機能を実行する
+    if(regexPattern.test(urlRef)) main(response);
+
+    // いあきゃらはMPAなので、URLが変更された場合は拡張機能を再実行する
+    watchUrlChange(regexPattern, () => main(response));
+})

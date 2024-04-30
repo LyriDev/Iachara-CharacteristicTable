@@ -16,6 +16,11 @@ async function addPortalRoot(): Promise<void>{ // 特徴表結果用ポータル
     const portalRoot = document.createElement('div');
     portalRoot.id = 'portal-root-characteristicTable';
     targetElement.appendChild(portalRoot);
+
+    // ポータルを要素の順番を無視して下部に固定する
+    targetElement.style.display = "flex";
+    targetElement.style.flexDirection = "column";
+    portalRoot.style.order = "1";
 }
 
 async function addCharacteristicTableButton(): Promise<void>{ // 特徴表ボタンを追加する関数

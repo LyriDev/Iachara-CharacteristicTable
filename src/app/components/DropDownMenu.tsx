@@ -9,12 +9,12 @@ const StyledMenu = styled((props: MenuProps) => (
     <Menu
         elevation={0}
         anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right',
+            vertical: 'top',
+            horizontal: 'left',
         }}
         transformOrigin={{
             vertical: 'top',
-            horizontal: 'right',
+            horizontal: 'left',
         }}
         {...props}
     />
@@ -24,19 +24,7 @@ const StyledMenu = styled((props: MenuProps) => (
     }
 }));
 
-export default function DropDownMenu({
-    focusIndex,
-    setFocusIndex,
-    anchorEl,
-    setAnchorEl,
-    setIsEditing
-}: {
-    focusIndex: number;
-    setFocusIndex: React.Dispatch<React.SetStateAction<number>>;
-    anchorEl: HTMLElement | null;
-    setAnchorEl: React.Dispatch<React.SetStateAction<HTMLElement | null>>;
-    setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+export default function DropDownMenu() {
     const {
         characteristicTableData,
         removeTable,

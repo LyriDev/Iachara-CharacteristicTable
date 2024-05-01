@@ -10,10 +10,10 @@ const manifest = defineManifest({
     "icons": {
         // "16": "image/icon16.png",
         // "48": "image/icon48.png",
-        // "128": "image/icon128.png"
+        "128": "image/icon128.png"
     },  
     action: {
-        // default_icon: "image/icon128.png",
+        default_icon: "image/icon128.png",
         default_title: "いあきゃら特徴表",
         default_popup: "src/index.html",
     },

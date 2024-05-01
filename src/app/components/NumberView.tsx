@@ -18,7 +18,7 @@ export default function NumberView(){
                 backgroundColor: "#202328"
             }}
         >
-            {`${parentIndex} ― ${childIndex}`}
+            {`${(parentIndex === null) ? 0 : parentIndex + 1 } ― ${(childIndex === null) ? 0 : childIndex + 1 }`}
         </div>
     )
 }

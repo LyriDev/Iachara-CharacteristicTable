@@ -18,8 +18,7 @@ export default function RoleResultArea({
             roleResultVisible && (
                 <div
                     style={{
-                        padding: "8px",
-                        paddingTop: "0px",
+                        paddingBottom: "12px",
                         backgroundColor: "white"
                     }}
                 >

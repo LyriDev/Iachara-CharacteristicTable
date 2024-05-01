@@ -4,10 +4,7 @@ import TextField from '@mui/material/TextField';
 
 export default function RoleResult(){
     const {
-        characteristicTableData,
-        tableIndex,
-        parentIndex,
-        childIndex
+        getTableData
     } = useContext(CharacteristicTableContext);
 
     return (
@@ -15,6 +12,7 @@ export default function RoleResult(){
             className="white-color"
             fullWidth
             multiline
+            minRows={2}
             style={{
                 // color: "white",
                 width: "75%"
@@ -23,7 +21,7 @@ export default function RoleResult(){
                 readOnly: true,
                 style: { padding: 0 }
             }}
-            value={characteristicTableData[tableIndex].tableData[parentIndex][childIndex]}
+            value={getTableData()}
         />
     );
 }

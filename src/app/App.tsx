@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import RoleResultArea from './components/RoleResultArea';
 import RoleButton from './components/RoleButton';
+import { ToastContainer } from 'react-toastify';
 
 export default function App(){
     const [roleResultVisible, setRoleResultVisible] = useState<boolean>(false);
@@ -14,6 +15,15 @@ export default function App(){
             <RoleResultArea
                 roleResultVisible={roleResultVisible}
                 setRoleResultVisible={setRoleResultVisible}
+            />
+            <ToastContainer 
+                theme="light"
+                closeOnClick
+                draggable
+                pauseOnHover={false}
+                style={{
+                    top: "4rem"
+                }}
             />
         </>
     )

@@ -23,11 +23,35 @@ export const theme = createTheme({
                     },
                     "&:active": {
                         backgroundColor: "#272a2d"
+                    }
+                }
+            }
+        },
+        MuiIconButton: {
+            styleOverrides: {
+                root: {
+                    color: "white",
+                    borderRadius: "4px",
+                    width: "38px",
+                    height: "38px",
+                    "&.MuiIconButton-colorPrimary":{
+                        backgroundColor: "#3a3f44",
+                        border: "1px #3a3f44 solid"
                     },
-                    "&.MuiButton-colorWarning:hover":{
+                    "&.MuiIconButton-colorPrimary:hover":{
+                        backgroundColor: "#32373b"
+                    },
+                    "&.MuiIconButton-colorPrimary:active": {
+                        backgroundColor: "#272a2d"
+                    },
+                    "&.MuiIconButton-colorWarning":{
+                        backgroundColor: "#ed544f",
+                        border: "1px #ed544f solid"
+                    },
+                    "&.MuiIconButton-colorWarning:hover":{
                         backgroundColor: "#CD4944"
                     },
-                    "&.MuiButton-colorWarning:active": {
+                    "&.MuiIconButton-colorWarning:active": {
                         backgroundColor: "#9E3835"
                     }
                 }

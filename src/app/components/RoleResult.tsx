@@ -20,7 +20,8 @@ export default function RoleResult(){
                 width: "75%"
             }}
             inputProps={{
-                readOnly: true
+                readOnly: true,
+                style: { padding: 0 }
             }}
             value={characteristicTableData[tableIndex].tableData[parentIndex][childIndex]}
         />

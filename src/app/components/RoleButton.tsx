@@ -1,14 +1,18 @@
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import DropDownMenu from './DropDownMenu';
+import { CharacteristicTableContext } from '../providers/CharacteristicTableProvider';
 
 export default function RoleButton({
-    roleCharacteristicTable
+    roleResultVisible,
+    setRoleResultVisible
 }: {
-    roleCharacteristicTable(): void;
+    roleResultVisible: boolean;
+    setRoleResultVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }){
+    const { roleCharacteristicTable } = useContext(CharacteristicTableContext);
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
     return (
@@ -22,7 +26,15 @@ export default function RoleButton({
                         textWrap: "nowrap",
                         border: "1px solid rgb(112, 112, 112)"
                     }}
-                    onClick={roleCharacteristicTable}
+                    onClick={() => {
+                        if(roleResultVisible){
+                            // 特徴表欄表示済みの場合、特徴表をロールする
+                            roleCharacteristicTable();
+                        }else{
+                            // 特徴表欄が非表示の場合、特徴表欄を表示する
+                            setRoleResultVisible(true);
+                        }
+                    }}
                 >
                     特徴表
                 </Button>

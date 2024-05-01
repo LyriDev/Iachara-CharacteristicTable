@@ -4,6 +4,7 @@ import { CharacteristicTableData } from '../../utils/characteristicTable';
 type ContextInfo = {
     characteristicTableData: CharacteristicTableData[];
     getTableData(): string;
+    roleCharacteristicTable(): void;
     tableIndex: number;
     setTableIndex: React.Dispatch<React.SetStateAction<number>>;
     parentIndex: number | null;
@@ -15,6 +16,7 @@ type ContextInfo = {
 const defaultContext: ContextInfo = {
     characteristicTableData: [],
     getTableData: () => "",
+    roleCharacteristicTable: () => {},
     tableIndex: 0,
     setTableIndex: () => {},
     parentIndex: null,
@@ -46,11 +48,21 @@ export function CharacteristicTableProvider({
         }
     }
 
+    // 特徴表を振る関数
+    function roleCharacteristicTable(){
+        const newParentIndex: number = getRandomIndex(characteristicTableData[tableIndex].tableData);
+        const newChildIndex: number = getRandomIndex(characteristicTableData[tableIndex].tableData[newParentIndex]);
+
+        setParentIndex(newParentIndex);
+        setChildIndex(newChildIndex);
+    }
+
     return (
         <CharacteristicTableContext.Provider
                 value={{
                     characteristicTableData,
                     getTableData,
+                    roleCharacteristicTable,
                     tableIndex,
                     setTableIndex,
                     parentIndex,
@@ -62,4 +74,9 @@ export function CharacteristicTableProvider({
             {children}
         </CharacteristicTableContext.Provider>
     );
+}
+
+// 配列からランダムなindexを取得する関数
+function getRandomIndex(array: any[]): number{
+    return Math.floor(Math.random() * array.length);
 }

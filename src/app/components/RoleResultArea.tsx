@@ -19,15 +19,41 @@ export default function RoleResultArea({
                 <div
                     style={{
                         padding: "8px",
+                        paddingTop: "0px",
                         backgroundColor: "white"
                     }}
                 >
-                    <RoleResult/>
-                    <NumberView/>
-                    <CopyButton/>
-                    <CloseButton
-                        setRoleResultVisible={setRoleResultVisible}
-                    />
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "center",
+                            gap: "0.5rem"
+                        }}
+                    >
+                        <RoleResult/>
+                        <div
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: "0.5rem"
+                            }}
+                        >
+                            <NumberView/>
+                            <div
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    gap: "0.5rem"
+                                }}
+                            >
+                                <CopyButton/>
+                                <CloseButton
+                                    setRoleResultVisible={setRoleResultVisible}
+                                />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             ),
             portal

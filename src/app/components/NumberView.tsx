@@ -10,7 +10,8 @@ export default function NumberView(){
     return (
         <div
             style={{
-                width: "fit-content",
+                textAlign: "center",
+                width: "100%",
                 padding: "calc(-1px + 0.5rem) 1em",
                 borderRadius: "4px",
                 color: "white",

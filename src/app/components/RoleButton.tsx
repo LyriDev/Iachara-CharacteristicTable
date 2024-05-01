@@ -12,7 +12,11 @@ export default function RoleButton({
     roleResultVisible: boolean;
     setRoleResultVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }){
-    const { roleCharacteristicTable } = useContext(CharacteristicTableContext);
+    const {
+        characteristicTableData,
+        roleCharacteristicTable,
+        tableIndex
+    } = useContext(CharacteristicTableContext);
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
     return (
@@ -36,7 +40,7 @@ export default function RoleButton({
                         }
                     }}
                 >
-                    特徴表
+                    {characteristicTableData[tableIndex].tableName}
                 </Button>
                 <Button
                     style={{

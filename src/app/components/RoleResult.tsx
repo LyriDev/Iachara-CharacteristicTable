@@ -12,7 +12,7 @@ export default function RoleResult(){
             className="white-color"
             fullWidth
             multiline
-            minRows={2}
+            rows={3}
             style={{
                 // color: "white",
                 width: "75%"

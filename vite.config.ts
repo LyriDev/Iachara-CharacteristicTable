@@ -4,7 +4,7 @@ import { defineConfig } from "vite";
 
 const manifest = defineManifest({
     manifest_version: 3,
-    version: "1.0",
+    version: "1.1",
     name: "いあきゃら特徴表",
     description: "いあきゃら上で特徴表を振ることができます。",
     "icons": {

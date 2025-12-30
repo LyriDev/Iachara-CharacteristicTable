@@ -19,7 +19,7 @@ export default function RoleResultArea({
                 <div
                     style={{
                         paddingBottom: "12px",
-                        backgroundColor: "white"
+                        backgroundColor: "#3a3f44"
                     }}
                 >
                     <div

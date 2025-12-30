@@ -23,6 +23,7 @@ export default function RoleButton({
         <>
             <ButtonGroup
                 disableRipple
+                disableElevation
                 variant="contained"
             >
                 <Button

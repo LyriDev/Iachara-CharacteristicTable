@@ -42,7 +42,7 @@ export const theme = createTheme({
         MuiMenu: {
             styleOverrides: {
                 paper: {
-                    color: "#fff",
+                    color: "#000",
                     backgroundColor: "rgba(44, 44, 44, 0.87)" // Menuコンポーネントの背景色を設定
                 }
             },

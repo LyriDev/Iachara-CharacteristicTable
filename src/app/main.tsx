@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { menuButtonQuery, portalQuery } from '../utils/documentQueries';
+import { createRoot } from 'react-dom/client';
+import { buttonAreaQuery } from '../utils/documentQueries';
 import Providers from './providers/Providers';
 import App from './App';
 import { CharacteristicTableData } from '../utils/characteristicTable';
@@ -8,37 +8,32 @@ import { getData } from '../utils/fetchChromeStorage';
 
 async function addPortalRoot(): Promise<void>{ // 特徴表結果用ポータルを追加するためのルート要素を作成する関数
     // ポータルを追加するための要素を取得する
-    let targetElement: HTMLElement|null = await challengeQuery(portalQuery);
+    let targetElement: HTMLElement|null = await challengeQuery(buttonAreaQuery);
     if (!targetElement){
          // 一定時間待機してもターゲットとなる要素が見つからなければ処理を止める
         throw new Error("特徴表欄を追加できませんでした")
     }
+    let portalTargetElement: HTMLElement|null = targetElement.parentElement;
+    if (!portalTargetElement) throw new Error("特徴表欄を追加できませんでした");
 
     // ポータルを追加するためのルート要素を作成
     const portalRoot = document.createElement('div');
     portalRoot.id = 'portal-root-characteristicTable';
-    targetElement.appendChild(portalRoot);
+    portalTargetElement.appendChild(portalRoot);
 
     // ポータルを要素の順番を無視して下部に固定する
-    targetElement.style.display = "flex";
-    targetElement.style.flexDirection = "column";
+    portalTargetElement.style.display = "flex";
+    portalTargetElement.style.flexDirection = "column";
     portalRoot.style.order = "1";
 }
 
 async function addCharacteristicTableButton(data: CharacteristicTableData[]): Promise<void>{ // 特徴表ボタンを追加する関数
     // ボタンを追加するための要素を取得する
-    let targetElement: HTMLElement|null = await challengeQuery(menuButtonQuery);
+    let targetElement: HTMLElement|null = await challengeQuery(buttonAreaQuery);
     if (!targetElement){
          // 一定時間待機してもターゲットとなる要素が見つからなければ処理を止める
         throw new Error("特徴表ボタンを追加できませんでした")
     }
-
-    // コンテナを追加する
-    const container: HTMLElement = document.createElement("div");
-    container.style.position = "relative";
-    container.style.right = "8rem";
-    targetElement.style.position = "absolute";
-    targetElement.after(container);
 
     // ドロップダウンメニューが開かれたときのbodyのoverflowを無効化する
     // スタイルシートに新しいルールを追加する
@@ -59,13 +54,18 @@ async function addCharacteristicTableButton(data: CharacteristicTableData[]): Pr
         styleSheet?.cssRules.length
     );
 
-    ReactDOM.render(
+    const reactContainer = document.createElement('div');
+    reactContainer.id = 'iachara-characteristic-table';
+    reactContainer.style.order = "999"
+    targetElement.appendChild(reactContainer);
+
+    const root = createRoot(reactContainer);
+    root.render(
         <React.StrictMode>
             <Providers characteristicTableData={data}>
                 <App/>
             </Providers>
-        </React.StrictMode>,
-        container
+        </React.StrictMode>
     );
 }
 
@@ -121,6 +121,8 @@ function watchUrlChange(targetUrl: RegExp, func: () => {}){
         characterData: true
     });
 }
+
+
 
 // 拡張機能を実行する関数
 async function main(data: CharacteristicTableData[]){

@@ -13,6 +13,7 @@ export default function CopyButton(){
         <IconButton
             disableRipple
             color="primary"
+            style={{ border: "1px solid rgb(112, 112, 112)" }}
             onClick={(_event: React.MouseEvent<HTMLElement>) => {
                 // クリップボードに文字列をコピーする
                 navigator.clipboard.writeText(getTableData());

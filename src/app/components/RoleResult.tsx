@@ -9,12 +9,11 @@ export default function RoleResult(){
 
     return (
         <TextField
-            className="white-color"
             fullWidth
             multiline
             rows={3}
             style={{
-                // color: "white",
+                color: "black",
                 width: "75%"
             }}
             inputProps={{

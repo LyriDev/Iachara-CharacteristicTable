@@ -17,7 +17,7 @@ function App() {
                 height: "35rem",
                 overflowY: "hidden"
             }}
-            sx={{ boxShadow: 3 }}
+            sx={{ boxShadow: 0 }}
         >
             <TabBar
                 focusIndex={focusIndex}

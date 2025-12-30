@@ -81,8 +81,8 @@ export const theme = createTheme({
         MuiTextField: {
             styleOverrides: {
                 root: {
-                    // color: "#fff",
-                    backgroundColor: "#202328",
+                    // color: "#3a3f44",
+                    backgroundColor: "#fff",
                     borderRadius: "4px"
                 }
             }
